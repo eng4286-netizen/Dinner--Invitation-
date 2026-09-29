@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dinner Invitation</title>
+  <title>رحاب 🤍</title>
 
   <style>
     * {
@@ -19,32 +19,41 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      padding: 20px;
     }
 
     .card {
-      width: 90%;
+      width: 100%;
       max-width: 390px;
       background: white;
-      padding: 40px 25px;
+      padding: 42px 25px;
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+      animation: fadeIn 0.7s ease;
     }
 
     h1 {
       margin-top: 0;
       font-size: 28px;
+      margin-bottom: 25px;
     }
 
     h2 {
-      font-size: 23px;
+      font-size: 24px;
       margin-bottom: 25px;
     }
 
     p {
       font-size: 18px;
-      line-height: 1.9;
+      line-height: 2;
       margin: 8px 0;
+    }
+
+    .small {
+      color: #777;
+      font-size: 15px;
+      margin-top: 20px;
     }
 
     .question {
@@ -55,124 +64,399 @@
 
     .buttons {
       margin-top: 25px;
-      height: 70px;
-      position: relative;
+      min-height: 60px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      align-items: center;
     }
 
     button {
       border: none;
-      border-radius: 10px;
-      padding: 14px 30px;
-      font-size: 18px;
+      border-radius: 12px;
+      padding: 14px 28px;
+      font-size: 17px;
       cursor: pointer;
+      transition: 0.25s;
     }
 
+    .main-btn,
     #yes {
       background: #222;
       color: white;
     }
 
     #no {
-      background: #e5e5e5;
+      background: #e9e9e9;
       color: #222;
-      position: fixed;
     }
 
-    #success {
+    button:active {
+      transform: scale(0.96);
+    }
+
+    #invitation,
+    #success,
+    #declined {
       display: none;
-      font-size: 24px;
-      font-weight: bold;
-      line-height: 1.7;
+    }
+
+    .heart {
+      font-size: 35px;
+      margin-bottom: 15px;
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      padding: 20px;
+    }
+
+    .popup {
+      width: 100%;
+      max-width: 340px;
+      background: white;
+      border-radius: 18px;
+      padding: 30px 22px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .popup h3 {
+      font-size: 21px;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .popup p {
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .popup button {
+      margin-top: 15px;
+      background: #222;
+      color: white;
+      min-width: 100px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- الصفحة الأولى -->
+  <div class="card" id="intro">
+
+    <div class="heart">🤍</div>
+
+    <h1>طوّلناها كثير...</h1>
+
+    <p>
+      وأنا ما أحب إن آخر شيء بيننا
+      يكون بالطريقة هذي.
+    </p>
+
+    <p>
+      إذا ودك نتكلم بهدوء ونفهم بعض،
+      بعيد عن الزعل والمكابرة...
+    </p>
+
+    <p><strong>أنا موجود.</strong></p>
+
+    <div class="buttons">
+      <button class="main-btn" onclick="showInvitation()">
+        كمّلي 🤍
+      </button>
+    </div>
+
+  </div>
+
+
+  <!-- دعوة القهوة -->
   <div class="card" id="invitation">
 
-    <h1>دعوة عشاء</h1>
+    <h1>دعوة قهوة ☕️</h1>
 
-    <h2>رحاب</h2>
+    <h2>رحاب 🤍</h2>
 
-    <p>يسعدني دعوتك للعشاء</p>
+    <p>
+      خلينا نترك اللي صار شوي على جنب،
+    </p>
 
-    <p><strong>9 سبتمبر 2026</strong></p>
-
-    <p><strong>9:00 مساءً</strong></p>
-
-    <p>Four Seasons Riyadh</p>
+    <p>
+      ونجلس على قهوة وكلام هادي.
+    </p>
 
     <div class="question">
-      هل تقبلين الدعوة؟
+      تقبلين الدعوة؟
     </div>
 
     <div class="buttons">
-      <button id="yes">YES</button>
+      <button id="yes">YES 🤍</button>
       <button id="no">NO</button>
+    </div>
+
+    <div class="small">
+      بدون زعل... وبدون مكابرة.
     </div>
 
   </div>
 
+
+  <!-- إذا اختارت YES -->
   <div class="card" id="success">
-    تم تأكيد الموعد<br><br>
-    أشوفك 9 سبتمبر الساعة 9 مساءً
+
+    <div class="heart">❤️</div>
+
+    <h1>أجل اتفقنا، Aşkım ❤️</h1>
+
+    <p>
+      هالمرة نترك الزعل والمكابرة وراءنا،
+    </p>
+
+    <p>
+      والباقي نقوله على القهوة. ☕️🤍
+    </p>
+
   </div>
+
+
+  <!-- إذا اختارت NO -->
+  <div class="card" id="declined">
+
+    <div class="heart">🤍</div>
+
+    <h1>وصلت.</h1>
+
+    <p>
+      أحترم قرارك،
+      وكان يهمني بس إني أحاول.
+    </p>
+
+    <p>
+      <strong>Aşkım ❤️</strong>
+    </p>
+
+  </div>
+
+
+  <!-- مزحة IT -->
+  <div class="popup-overlay" id="itPopup">
+
+    <div class="popup">
+
+      <h3>شكلك نسيتي إني IT 💻</h3>
+
+      <p>
+        كان لازم أصعّب الـ NO شوي.
+      </p>
+
+      <button onclick="showFinalWarning()">
+        طيب
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- التنبيه الأخير -->
+  <div class="popup-overlay" id="finalPopup">
+
+    <div class="popup">
+
+      <h3>خلاص 🤍</h3>
+
+      <p>
+        هالمرة القرار لك فعلًا...
+      </p>
+
+      <p>
+        إذا ضغطتي <strong>NO</strong> مرة ثانية،
+        بوعدك يمشي قرارك.
+      </p>
+
+      <p>
+        <strong>Aşkım ❤️</strong>
+      </p>
+
+      <button onclick="closeFinalWarning()">
+        تمام
+      </button>
+
+    </div>
+
+  </div>
+
 
 <script>
 
-const noButton = document.getElementById("no");
-const yesButton = document.getElementById("yes");
+  const intro = document.getElementById("intro");
+  const invitation = document.getElementById("invitation");
+  const success = document.getElementById("success");
+  const declined = document.getElementById("declined");
 
-function moveNo() {
+  const yesButton = document.getElementById("yes");
+  const noButton = document.getElementById("no");
 
-  const padding = 20;
+  const itPopup = document.getElementById("itPopup");
+  const finalPopup = document.getElementById("finalPopup");
 
-  const maxX =
-    window.innerWidth -
-    noButton.offsetWidth -
-    padding;
+  let noAttempts = 0;
+  let noUnlocked = false;
 
-  const maxY =
-    window.innerHeight -
-    noButton.offsetHeight -
-    padding;
 
-  const x =
-    Math.max(padding, Math.random() * maxX);
+  function showInvitation() {
+    intro.style.display = "none";
+    invitation.style.display = "block";
+  }
 
-  const y =
-    Math.max(padding, Math.random() * maxY);
 
-  noButton.style.left = x + "px";
-  noButton.style.top = y + "px";
-}
+  function moveNo() {
 
-noButton.addEventListener("touchstart", function(e) {
-  e.preventDefault();
-  moveNo();
-});
+    if (noAttempts < 2) {
 
-noButton.addEventListener("mouseenter", moveNo);
+      noAttempts++;
 
-noButton.addEventListener("click", function(e) {
-  e.preventDefault();
-  moveNo();
-});
+      noButton.style.position = "fixed";
 
-yesButton.addEventListener("click", function() {
+      const padding = 25;
 
-  document.getElementById("invitation").style.display = "none";
-  noButton.style.display = "none";
-  document.getElementById("success").style.display = "block";
+      const maxX =
+        window.innerWidth -
+        noButton.offsetWidth -
+        padding;
 
-});
+      const maxY =
+        window.innerHeight -
+        noButton.offsetHeight -
+        padding;
 
-window.onload = function() {
-  const rect = noButton.getBoundingClientRect();
-  noButton.style.left = (window.innerWidth / 2 + 45) + "px";
-  noButton.style.top = rect.top + "px";
-};
+      const x =
+        Math.max(
+          padding,
+          Math.random() * maxX
+        );
+
+      const y =
+        Math.max(
+          padding,
+          Math.random() * maxY
+        );
+
+      noButton.style.left = x + "px";
+      noButton.style.top = y + "px";
+
+
+      if (noAttempts === 2) {
+
+        setTimeout(function() {
+
+          noButton.style.position = "static";
+          noButton.style.left = "";
+          noButton.style.top = "";
+
+          itPopup.style.display = "flex";
+
+        }, 350);
+
+      }
+
+    }
+
+  }
+
+
+  function showFinalWarning() {
+
+    itPopup.style.display = "none";
+    finalPopup.style.display = "flex";
+
+  }
+
+
+  function closeFinalWarning() {
+
+    finalPopup.style.display = "none";
+    noUnlocked = true;
+
+  }
+
+
+  /* زر NO على الجوال */
+  noButton.addEventListener(
+    "touchstart",
+    function(e) {
+
+      if (!noUnlocked) {
+        e.preventDefault();
+        moveNo();
+      }
+
+    }
+  );
+
+
+  /* زر NO على الكمبيوتر */
+  noButton.addEventListener(
+    "mouseenter",
+    function() {
+
+      if (!noUnlocked) {
+        moveNo();
+      }
+
+    }
+  );
+
+
+  /* بعد فتح خيار NO */
+  noButton.addEventListener(
+    "click",
+    function(e) {
+
+      if (!noUnlocked) {
+        e.preventDefault();
+        return;
+      }
+
+      invitation.style.display = "none";
+      noButton.style.display = "none";
+      declined.style.display = "block";
+
+    }
+  );
+
+
+  /* YES */
+  yesButton.addEventListener(
+    "click",
+    function() {
+
+      invitation.style.display = "none";
+      noButton.style.display = "none";
+      success.style.display = "block";
+
+    }
+  );
 
 </script>
 
